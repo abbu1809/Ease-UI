@@ -1,73 +1,155 @@
-# React + TypeScript + Vite
+# EaseUI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EaseUI is a React and TypeScript component library for building expressive, accessible interfaces quickly. This repository includes a Vite-powered documentation site with live previews, usage examples, API tables, light and dark themes, and interactive component demos.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Reusable React components with typed props
+- Light and dark theme support
+- Button variants, sizes, entrance animations, and hover animations
+- Flexible cards with image ratios, variants, and GSAP interactions
+- Modal overlays with configurable actions and sizes
+- Standard and specialized input components
+- Carousel with navigation controls and optional autoplay
+- Tooltip with hover and focus support
+- Layout primitive for sidebar, header, and content areas
+- Documentation pages with copyable code examples
+- Tailwind CSS styling with Class Variance Authority
 
-## React Compiler
+## Component Catalog
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The documentation site currently includes:
 
-## Expanding the ESLint configuration
+- `Button`
+- `Card`
+- `Modal`
+- `Input`
+- `Navbar`
+- `Carousel`
+- `Tooltip`
+- `Layout`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Input variants are also available: `AnimatedInput`, `FloatingLabelInput`, `InputWithIcon`, `PasswordInput`, `NumberInput`, and `Textarea`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Requirements
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 18 or newer
+- npm
+
+### Install
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start the documentation site
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Open the local URL printed by Vite. The main documentation entry point is `/components`.
+
+### Production build
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+## Using Components
+
+Components can be imported from the package entry point:
+
+```tsx
+import { Button, Card, Input } from 'dev-ease-ui';
+import 'dev-ease-ui/style.css';
+
+export function Example() {
+  return (
+    <Card title="Welcome" description="A reusable EaseUI card.">
+      <Input label="Email" placeholder="you@example.com" />
+      <Button className="mt-4" variant="primary">
+        Continue
+      </Button>
+    </Card>
+  );
+}
+```
+
+During local development, components can also be imported directly from the source tree:
+
+```tsx
+import { Button } from '@/components/Button/Button';
+```
+
+## Documentation Routes
+
+| Route                  | Component                  |
+| ---------------------- | -------------------------- |
+| `/components`          | Component library overview |
+| `/components/button`   | Button                     |
+| `/components/card`     | Card                       |
+| `/components/modal`    | Modal                      |
+| `/components/input`    | Input and input variants   |
+| `/components/navbar`   | Navbar                     |
+| `/components/carousel` | Carousel                   |
+| `/components/tooltip`  | Tooltip                    |
+| `/components/layout`   | Layout                     |
+
+Each component page includes a live usage preview, a code example, and an API reference table.
+
+## Theme Support
+
+The documentation site stores the selected theme in `localStorage` and applies it to the root document through the `data-theme` attribute:
+
+```html
+<html data-theme="dark"></html>
+```
+
+Theme tokens are defined in `src/index.css`. The available modes are `light` and `dark`.
+
+## Project Structure
+
+```text
+src/
+├── components/       Reusable UI components
+├── features/         Redux theme state
+├── layouts/          Home and documentation layouts
+├── libs/             Utilities and animation helpers
+├── pages/            Landing page and component documentation
+├── router/           Application routes
+└── store/            Redux store configuration
+```
+
+## Scripts
+
+| Command           | Description                                             |
+| ----------------- | ------------------------------------------------------- |
+| `npm run dev`     | Start the Vite development server                       |
+| `npm run build`   | Create the production bundle and generate library types |
+| `npm run preview` | Preview the production bundle locally                   |
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Redux Toolkit and React Redux
+- React Router
+- Lucide React
+- GSAP
+- Radix Slot
+- Class Variance Authority
+
+## License
+
+This project is released under the MIT License.
