@@ -17,8 +17,10 @@ const inputCls = cva(
   }
 );
 
-export interface FloatingLabelProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface FloatingLabelProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size'
+> {
   label: string;
   size?: 'sm' | 'md' | 'lg';
 }

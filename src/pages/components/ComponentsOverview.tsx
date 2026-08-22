@@ -1,5 +1,11 @@
 import { Link } from 'react-router';
-import { ArrowRight, Blocks, Code2, Palette, type LucideIcon } from 'lucide-react';
+import {
+  ArrowRight,
+  Blocks,
+  Code2,
+  Palette,
+  type LucideIcon,
+} from 'lucide-react';
 
 const components = [
   ['Button', 'Actions, states, and motion', 'button'],

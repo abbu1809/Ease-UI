@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Search,
-  Copy,
-  Check,
-  ChevronRight,
-  Code2,
-} from 'lucide-react';
+import { Search, Copy, Check, ChevronRight, Code2 } from 'lucide-react';
 
 type ThemeState = {
   theme: {
