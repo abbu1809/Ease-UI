@@ -7,8 +7,7 @@ const HomeLayout = ({}: Props) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-
-      <main className="flex-grow p-6">
+      <main>
         <Outlet />
       </main>
     </div>

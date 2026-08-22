@@ -1,19 +1,19 @@
-import React, { useEffect, useRef } from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/utils";
-import { hoverAnimations } from "@/libs/animations/hoverAnimation";
-import gsap from "gsap";
+import React, { useEffect, useRef } from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/libs/utils';
+import { hoverAnimations } from '@/libs/animations/hoverAnimation';
+import gsap from 'gsap';
 
 const cardVariants = cva(
-  "rounded-lg transition-all duration-300 cursor-pointer overflow-hidden",
+  'rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden',
   {
     variants: {
       variant: {
-        light: "bg-white text-gray-800 shadow-lg hover:shadow-xl",
-        dark: "bg-slate-800 text-white shadow-md hover:shadow-lg",
+        light: 'bg-[var(--surface-color)] text-[var(--text-color)]',
+        dark: 'bg-[var(--surface-dark,#262622)] text-white',
         outline:
-          "border border-gray-300 bg-transparent text-gray-800 dark:border-gray-700",
+          'border border-[var(--border-color)] bg-transparent text-[var(--text-color)]',
       },
       // hoverEffect: {
       //   none: "",
@@ -23,26 +23,27 @@ const cardVariants = cva(
       //   rotate: "hover:rotate-1",
       // },
       size: {
-        sm: "p-3 text-sm",
-        md: "p-6 text-base",
-        lg: "p-8 text-lg",
+        sm: 'p-3 text-sm',
+        md: 'p-6 text-base',
+        lg: 'p-8 text-lg',
       },
     },
     defaultVariants: {
-      variant: "light",
-      size: "md",
+      variant: 'light',
+      size: 'md',
     },
   }
 );
 
 interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
   asChild?: boolean;
   title?: string;
   description?: string;
   image?: string;
-  ratio?: "square" | "16:9" | "4:3";
+  ratio?: 'square' | '16:9' | '4:3';
   footer?: React.ReactNode;
   animate?: boolean;
   hoverAnimation?: keyof typeof hoverAnimations;
@@ -58,16 +59,16 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       className,
       variant,
       image,
-      ratio = "16:9",
+      ratio = '16:9',
       size,
       footer,
       animate = true,
-      hoverAnimation = "none",
+      hoverAnimation = 'none',
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "div";
+    const Comp = asChild ? Slot : 'div';
     const cardRef = useRef<HTMLDivElement | null>(null);
 
     // 🧠 Mouse Handlers
@@ -104,27 +105,27 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const handleMouseDown = () => {
       const el = cardRef.current;
       if (!el) return;
-      gsap.to(el, { scale: 0.95, duration: 0.1, ease: "power1.inOut" });
+      gsap.to(el, { scale: 0.95, duration: 0.1, ease: 'power1.inOut' });
     };
 
     const handleMouseUp = () => {
       const el = cardRef.current;
       if (!el) return;
-      gsap.to(el, { scale: 1.05, duration: 0.1, ease: "back.out(2)" });
+      gsap.to(el, { scale: 1.05, duration: 0.1, ease: 'back.out(2)' });
     };
 
     const imageRatio =
-      ratio === "16:9"
-        ? "aspect-video"
-        : ratio === "4:3"
-        ? "aspect-[4/3]"
-        : "aspect-square";
+      ratio === '16:9'
+        ? 'aspect-video'
+        : ratio === '4:3'
+          ? 'aspect-[4/3]'
+          : 'aspect-square';
 
     return (
       <Comp
         ref={(node) => {
           cardRef.current = node as HTMLDivElement;
-          if (typeof ref === "function") ref(node as HTMLDivElement);
+          if (typeof ref === 'function') ref(node as HTMLDivElement);
           else if (ref) ref.current = node as HTMLDivElement;
         }}
         onMouseEnter={handleMouseEnter}
@@ -140,19 +141,17 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div className={`${imageRatio} mb-4`}>
             <img
               src={image}
-              alt={title || "Card image"}
+              alt={title || 'Card image'}
               className="w-full h-full object-cover rounded-md"
             />
           </div>
         )}
 
         {title && (
-          <h3 className="font-semibold text-lg mb-2 text-[inherit]">{title}</h3>
+          <h3 className="font-semibold text-lg mb-2 text-inherit">{title}</h3>
         )}
 
-        {description && (
-          <p className="text-gray-500 mb-4 text-[inherit]">{description}</p>
-        )}
+        {description && <p className="mb-4 text-inherit">{description}</p>}
 
         {children}
 
@@ -162,5 +161,5 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   }
 );
 
-Card.displayName = "Card";
+Card.displayName = 'Card';
 export { Card, cardVariants };

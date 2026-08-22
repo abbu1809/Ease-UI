@@ -1,39 +1,42 @@
 // Navbar.tsx
-import { Slot } from "@radix-ui/react-slot";
-import React, { forwardRef, useEffect, useRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/utils";
-import { entranceAnimations } from "@/libs/animations/entranceAnimation";
-import { hoverAnimations } from "@/libs/animations/hoverAnimation";
-import gsap from "gsap";
-import { Button } from "../Button";
+import { Slot } from '@radix-ui/react-slot';
+import React, { forwardRef, useEffect, useRef } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/libs/utils';
+import { entranceAnimations } from '@/libs/animations/entranceAnimation';
+import { hoverAnimations } from '@/libs/animations/hoverAnimation';
+import gsap from 'gsap';
+import { Button } from '../Button';
 
 const navbarVariants = cva(
-  `w-full flex items-center justify-between px-6 py-4 rounded-md border border-gray-200 transition-all`,
+  `w-full flex items-center justify-between px-6 py-4 rounded-2xl border transition-all`,
   {
     variants: {
       variant: {
-        dark: "bg-slate-900 text-white",
-        light: "bg-white text-gray-800 shadow",
-        primary: "bg-indigo-600 text-white",
-        glass: "backdrop-blur-md bg-white/10 text-white border border-white/20",
+        dark: 'bg-[#262622] text-white border-[#514b45]',
+        light:
+          'bg-[var(--surface-color)] text-[var(--text-color)] border-[var(--border-color)]',
+        primary: 'bg-[var(--primary-color)] text-white border-transparent',
+        glass:
+          'backdrop-blur-md bg-[var(--surface-color)]/70 text-[var(--text-color)] border-[var(--border-color)]',
       },
       size: {
-        default: "h-16",
-        sm: "h-12",
-        lg: "h-20",
-        xl: "h-24",
+        default: 'h-16',
+        sm: 'h-12',
+        lg: 'h-20',
+        xl: 'h-24',
       },
     },
     defaultVariants: {
-      variant: "light",
-      size: "default",
+      variant: 'light',
+      size: 'default',
     },
   }
 );
 
 interface NavbarProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends
+    React.HTMLAttributes<HTMLElement>,
     VariantProps<typeof navbarVariants> {
   asChild?: boolean;
   animation?: keyof typeof entranceAnimations;
@@ -47,17 +50,17 @@ const Navbar = forwardRef<HTMLElement, NavbarProps>(
       variant,
       size,
       asChild = false,
-      animation = "fadeIn",
-      hoverAnimation = "none",
+      animation = 'fadeIn',
+      hoverAnimation = 'none',
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "nav";
+    const Comp = asChild ? Slot : 'nav';
     const navbarRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
-      if (!navbarRef.current || animation === "none") return;
+      if (!navbarRef.current || animation === 'none') return;
       entranceAnimations[animation]?.(navbarRef.current);
     }, [animation]);
 
@@ -78,7 +81,7 @@ const Navbar = forwardRef<HTMLElement, NavbarProps>(
       <Comp
         ref={(node) => {
           navbarRef.current = node as HTMLElement;
-          if (typeof ref === "function") ref(node as HTMLElement);
+          if (typeof ref === 'function') ref(node as HTMLElement);
           else if (ref)
             (ref as React.MutableRefObject<HTMLElement | null>).current = node;
         }}
@@ -101,6 +104,6 @@ const Navbar = forwardRef<HTMLElement, NavbarProps>(
   }
 );
 
-Navbar.displayName = "Navbar";
+Navbar.displayName = 'Navbar';
 
 export { Navbar, navbarVariants };

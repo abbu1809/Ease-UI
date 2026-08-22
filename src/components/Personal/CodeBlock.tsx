@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { useState } from 'react';
+import { Copy, Check } from 'lucide-react';
 
 interface CodeBlockProps {
   code: string;
   language?: string;
 }
 
-const CodeBlock = ({ code, language = "tsx" }: CodeBlockProps) => {
+const CodeBlock = ({ code, language = 'tsx' }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -17,18 +17,40 @@ const CodeBlock = ({ code, language = "tsx" }: CodeBlockProps) => {
 
   return (
     <div className="relative">
-      <div className="flex items-center justify-between bg-gray-900 text-gray-100 px-4 py-2 rounded-t-md">
+      <div
+        className="flex items-center justify-between rounded-t-2xl px-4 py-3"
+        style={{
+          background: 'var(--text-color)',
+          color: 'var(--surface-color)',
+        }}
+      >
         <span className="text-xs font-mono uppercase">{language}</span>
         <button
           onClick={copyToClipboard}
-          className="flex items-center gap-2 px-2 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded transition-colors"
+          className="flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold transition-colors hover:opacity-80"
+          style={{
+            background: 'var(--primary-color)',
+            color: '#ffffff',
+          }}
         >
           {copied ? <Check size={14} /> : <Copy size={14} />}
-          {copied ? "Copied!" : "Copy"}
+          {copied ? 'Copied!' : 'Copy'}
         </button>
       </div>
-      <pre className="bg-gray-50 border border-t-0 border-gray-200 p-4 rounded-b-md overflow-x-auto">
-        <code className="text-sm text-gray-800">{code}</code>
+      <pre
+        className="overflow-x-auto rounded-b-2xl border border-t-0 p-5"
+        style={{
+          background: 'var(--surface-soft)',
+          borderColor: 'var(--border-color)',
+          color: 'var(--text-color)',
+        }}
+      >
+        <code
+          className="text-sm leading-6"
+          style={{ color: 'var(--text-color)' }}
+        >
+          {code}
+        </code>
       </pre>
     </div>
   );

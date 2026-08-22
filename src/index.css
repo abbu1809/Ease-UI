@@ -1,22 +1,91 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
 :root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --primary-color: #2563eb;
-  /* --card-bg: #f3f4f6; */
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color-scheme: light;
+  --bg-color: #fbfbf9;
+  --surface-color: #ffffff;
+  --surface-soft: #f6f6f3;
+  --surface-strong: #e5e5e0;
+  --text-color: #211922;
+  --text-muted: #62625b;
+  --text-faint: #91918c;
+  --border-color: #dadad3;
+  --primary-color: #e60023;
+  --primary-pressed: #cc001f;
+  --focus-color: #435ee5;
 }
 
-[data-theme="dark"] {
-  --bg-color: #18181b;
-  --text-color: #f4f4f5;
-  --primary-color: #3b82f6;
-  --card-bg: #27272a;
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-color: #211f1d;
+  --surface-color: #2b2926;
+  --surface-soft: #36332f;
+  --surface-strong: #47433e;
+  --text-color: #fffaf5;
+  --text-muted: #d0c8c0;
+  --text-faint: #a79d94;
+  --border-color: #514b45;
+  --primary-color: #ff4d67;
+  --primary-pressed: #e60023;
+  --focus-color: #91a4ff;
 }
-
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.25s, color 0.25s;
+  margin: 0;
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.design-surface {
+  background: var(--surface-color);
+  border-color: var(--border-color);
+}
+.design-soft {
+  background: var(--surface-soft);
+}
+.design-muted {
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .text-gray-600,
+[data-theme='dark'] .text-gray-700,
+[data-theme='dark'] .text-zinc-500,
+[data-theme='dark'] .text-zinc-600,
+[data-theme='dark'] .text-gray-500 {
+  color: var(--text-muted);
+}
+[data-theme='dark'] .text-gray-900,
+[data-theme='dark'] .text-zinc-900 {
+  color: var(--text-color);
+}
+[data-theme='dark'] .bg-white,
+[data-theme='dark'] .bg-gray-50,
+[data-theme='dark'] .bg-zinc-50 {
+  background-color: var(--surface-color);
+}
+[data-theme='dark'] .bg-gray-100,
+[data-theme='dark'] .bg-gray-200,
+[data-theme='dark'] .bg-zinc-100 {
+  background-color: var(--surface-soft);
+}
+[data-theme='dark'] .border-gray-200,
+[data-theme='dark'] .border-gray-300 {
+  border-color: var(--border-color);
 }
 
 @keyframes fadeIn {

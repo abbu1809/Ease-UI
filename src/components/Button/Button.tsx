@@ -1,14 +1,15 @@
-import { Slot } from "@radix-ui/react-slot";
-import React, { useEffect, useRef } from "react";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import { cn } from "@/libs/utils";
+import { Slot } from '@radix-ui/react-slot';
+import React, { useEffect, useRef } from 'react';
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
+import { cn } from '@/libs/utils';
 // import gsap from "gsap";
-import { entranceAnimations } from "@/libs/animations/entranceAnimation";
-import { hoverAnimations } from "@/libs/animations/hoverAnimation";
+import { entranceAnimations } from '@/libs/animations/entranceAnimation';
+import { hoverAnimations } from '@/libs/animations/hoverAnimation';
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   onClick?: () => void;
@@ -17,33 +18,36 @@ interface ButtonProps
 }
 
 const buttonVariants = cva(
-  `inline-flex items-center cursor-pointer justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50`,
+  `inline-flex items-center cursor-pointer justify-center rounded-2xl text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-(--focus-color) disabled:pointer-events-none disabled:opacity-50`,
   {
     variants: {
       variant: {
-        dark: "bg-slate-900 text-white",
-        primary: "bg-indigo-600 hover:bg-indigo-700 text-white",
-        secondary: "bg-indigo-500 hover:bg-indigo-700 text-white",
-        destructive: "bg-red-700 text-white hover:bg-red-900",
-        ok: "bg-green-500 hover:bg-green-700",
-        ghost: "bg-gray-50 hover:bg-gray-100 text-gray-700",
-        link: "bg-transparent hover:bg-transparent text-indigo-600",
+        dark: 'bg-[var(--text-color)] text-[var(--surface-color)]',
+        primary:
+          'bg-[var(--primary-color)] hover:bg-[var(--primary-pressed)] text-white',
+        secondary:
+          'bg-[var(--surface-strong)] hover:bg-[var(--border-color)] text-[var(--text-color)]',
+        destructive: 'bg-[#9e0a0a] text-white hover:bg-[#cc001f]',
+        ok: 'bg-[#103c25] text-white hover:bg-[#14512f]',
+        ghost:
+          'bg-transparent hover:bg-[var(--surface-soft)] text-[var(--text-color)]',
+        link: 'bg-transparent hover:bg-transparent text-[var(--text-color)] underline-offset-4 hover:underline',
         outline:
-          "bg-transparent hover:bg-gray-100 text-gray-700 border border-gray-300",
+          'bg-transparent hover:bg-[var(--surface-soft)] text-[var(--text-color)] border border-[var(--border-color)]',
       },
       size: {
-        default: "px-9 py-3",
-        sm: "px-4 py-2",
-        lg: "px-14 py-4",
-        xl: "px-16 py-4",
-        icon: "w-12 h-12",
-        full: "w-full h-12",
-        auto: "w-auto h-auto",
+        default: 'px-9 py-3',
+        sm: 'px-4 py-2',
+        lg: 'px-14 py-4',
+        xl: 'px-16 py-4',
+        icon: 'w-12 h-12',
+        full: 'w-full h-12',
+        auto: 'w-auto h-auto',
       },
     },
     defaultVariants: {
-      variant: "primary",
-      size: "default",
+      variant: 'primary',
+      size: 'default',
     },
   }
 );
@@ -55,19 +59,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant,
       size,
       asChild = false,
-      animation = "fadeIn",
-      hoverAnimation = "jiggle",
+      animation = 'fadeIn',
+      hoverAnimation = 'jiggle',
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild ? Slot : 'button';
 
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     useEffect(() => {
       const el = buttonRef.current;
-      if (!el || animation === "none") return;
+      if (!el || animation === 'none') return;
       entranceAnimations[animation]?.(el);
     }, [animation]);
 
@@ -94,7 +98,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       gsap.to(buttonRef.current, {
         scale: 1.05,
         duration: 0.15,
-        ease: "back.out(2)",
+        ease: 'back.out(2)',
       });
     };
 
@@ -102,7 +106,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={(node) => {
           buttonRef.current = node as HTMLButtonElement;
-          if (typeof ref === "function") ref(node as HTMLButtonElement);
+          if (typeof ref === 'function') ref(node as HTMLButtonElement);
           else if (ref)
             (ref as React.MutableRefObject<HTMLButtonElement | null>).current =
               node;
@@ -117,5 +121,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-Button.displayName = "Button";
+Button.displayName = 'Button';
 export { Button, buttonVariants };
