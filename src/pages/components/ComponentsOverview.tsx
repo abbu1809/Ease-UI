@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { ArrowRight, Blocks, Code2, Palette } from 'lucide-react';
+import { ArrowRight, Blocks, Code2, Palette, type LucideIcon } from 'lucide-react';
 
 const components = [
   ['Button', 'Actions, states, and motion', 'button'],
@@ -10,6 +10,12 @@ const components = [
   ['Carousel', 'Browse grouped content', 'carousel'],
   ['Tooltip', 'Helpful contextual details', 'tooltip'],
   ['Layout', 'Consistent page structure', 'layout'],
+];
+
+const stats: Array<[string, string, LucideIcon]> = [
+  ['8', 'component families', Blocks],
+  ['TypeScript', 'typed APIs', Code2],
+  ['Light + dark', 'theme-ready surfaces', Palette],
 ];
 
 const ComponentsOverview = () => (
@@ -34,11 +40,7 @@ const ComponentsOverview = () => (
     </header>
 
     <section className="grid gap-4 sm:grid-cols-3">
-      {[
-        ['8', 'component families', Blocks],
-        ['TypeScript', 'typed APIs', Code2],
-        ['Light + dark', 'theme-ready surfaces', Palette],
-      ].map(([value, label, Icon]) => (
+      {stats.map(([value, label, Icon]) => (
         <div
           key={String(label)}
           className="rounded-2xl border p-5"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/libs/utils';
 
-interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   content: React.ReactNode;
   side?: 'top' | 'bottom';
 }

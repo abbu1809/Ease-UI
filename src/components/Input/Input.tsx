@@ -1,45 +1,46 @@
-import React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/utils";
+import React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/libs/utils';
 
 const inputVariants = cva(
-  "w-full rounded-md focus:outline-none shadow-sm transition-all duration-150 bg-white placeholder:text-gray-400",
+  'w-full rounded-md focus:outline-none shadow-sm transition-all duration-150 bg-white placeholder:text-gray-400',
   // w-full bg-transparent border-b border-gray-500 pb-2 pt-6 focus:outline-none transition-all
   {
     variants: {
       size: {
-        sm: "px-3 py-1.5 text-sm",
-        md: "px-4 py-2 text-base",
-        lg: "px-5 py-3 text-lg",
+        sm: 'px-3 py-1.5 text-sm',
+        md: 'px-4 py-2 text-base',
+        lg: 'px-5 py-3 text-lg',
       },
       tone: {
         default:
-          "border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400",
+          'border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400',
         error:
-          "border-red-400 focus:ring-2 focus:ring-red-400 focus:border-red-400",
+          'border-red-400 focus:ring-2 focus:ring-red-400 focus:border-red-400',
         success:
-          "border-green-400 focus:ring-2 focus:ring-green-400 focus:border-green-400",
+          'border-green-400 focus:ring-2 focus:ring-green-400 focus:border-green-400',
       },
       disabled: {
-        true: "bg-gray-100 text-gray-400 cursor-not-allowed opacity-80",
+        true: 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-80',
       },
     },
     defaultVariants: {
-      size: "md",
-      tone: "default",
+      size: 'md',
+      tone: 'default',
       disabled: false,
     },
   }
 );
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+    Omit<VariantProps<typeof inputVariants>, 'disabled'> {
   label?: string;
   hint?: string;
   error?: string;
   id?: string;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -49,7 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       hint,
       error,
       className,
-      size = "md",
+      size = 'md',
       tone,
       disabled,
       id,
@@ -88,5 +89,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
 export { Input, inputVariants };

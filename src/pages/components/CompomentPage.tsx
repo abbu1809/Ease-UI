@@ -5,7 +5,6 @@ import {
   Copy,
   Check,
   ChevronRight,
-  ExternalLink,
   Code2,
 } from 'lucide-react';
 
